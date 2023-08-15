@@ -58,7 +58,7 @@ namespace SqlKata.Compilers
 
         protected override SqlResult CompileCreateTableAs(Query query)
         {
-            var compiledSelectQuery = CompileSelectQuery(query.GetOneComponent<CreateTableAsClause>("CreateTableAsQuery").SelectQuery).RawSql;
+            var compiledSelectQuery = Compile(query.GetOneComponent<CreateTableAsClause>("CreateTableAsQuery").SelectQuery).ToString();
             return DdlCompiler.CompileCreateTableAs(query,DataSource.MySql,compiledSelectQuery);
         }
 
