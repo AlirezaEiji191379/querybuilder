@@ -21,6 +21,7 @@ namespace SqlKata.Compilers.DDLCompiler.CreateTableBuilders.QueryFormat.Fillers.
         {
             var createTableColumnClauses = query.GetComponents<CreateTableColumn>("CreateTableColumn");
             var tableName = query.GetOneComponent<FromClause>("from").Table;
+            tableName = new SqlServerCompiler().Wrap(tableName);
             return string.Format(queryFormat,
                 tableName,
                 _columnCompiler.CompileCreateTableColumns(createTableColumnClauses,DataSource.SqlServer),

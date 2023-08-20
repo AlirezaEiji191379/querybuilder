@@ -27,6 +27,7 @@ namespace SqlKata.Compilers.DDLCompiler.CreateTableBuilders.QueryFormat.Fillers.
         {
             var createTableColumnClauses = query.GetComponents<CreateTableColumn>("CreateTableColumn");
             var tableName = query.GetOneComponent<FromClause>("from").Table;
+            tableName = new PostgresCompiler().Wrap(tableName);
             var tableType = query.GetOneComponent<TableCluase>("TableType").TableType;
             var tempString = tableType == TableType.Temporary ? _sqlCreateCommandUtil.GetTempTableClause() : "";
             return string.Format(queryFormat,

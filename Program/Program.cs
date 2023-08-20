@@ -21,7 +21,7 @@ namespace Program
             serviceCollection.AddKataServices();
             var provider = serviceCollection.BuildServiceProvider();
             var compilerProvider = provider.GetRequiredService<ICompilerProvider>();
-            var compiler = compilerProvider.CreateCompiler(DataSource.Postgresql);
+            var compiler = compilerProvider.CreateCompiler(DataSource.MySql);
 
             //var query = new Query("Users").DropTable();
             //var query = new Query("Users").Truncate();
@@ -34,7 +34,7 @@ namespace Program
                         };
 
                         Console.WriteLine(compiler.Wrap(fromClause.Table));*/
-            var query = new Query("users").Select("Id", "FullName").Into("public.Sample");
+            var query = CreateTableAs();
             Console.WriteLine(compiler.Compile(query));
         }
 
